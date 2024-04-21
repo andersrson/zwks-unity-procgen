@@ -2,10 +2,10 @@
     "name": "xyz.zwks.procgen.editor",
     "rootNamespace": "xyz.zwks.procgen.editor",
     "references": [
-        "GUID:9da7d9bc816f04bc2a899b3b04c2b745",
-        "GUID:d8b63aba1907145bea998dd612889d6b",
-        "GUID:21b0c8d1703a94250bfac916590cea4f",
-        "GUID:54cb1906aeb4e4264bc1d2aa3818a43f"
+        "xyz.zwks.procgen",
+        "Unity.Mathematics",
+        "Unity.VisualScripting.Core",
+        "Unity.VisualScripting.Core.Editor"
     ],
     "includePlatforms": [
         "Editor"
