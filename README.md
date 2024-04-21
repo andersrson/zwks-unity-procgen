@@ -13,7 +13,7 @@ The generated textures, materials, and meshes can be saved to your project as as
 ![Scene preview](/scene-preview.png)
 
 ## Usage
-Install the package from Package Manager using the Git URL and wait for compilation. Note thtat the minimum Unity version is 2023.2. It should work on 2023.1 but haven't tested it. Modifying to support earlier versions should be relatively easy.  
+Install the package from Package Manager using the Git URL (https://github.com/andersrson/zwks-unity-procgen.git) and wait for compilation. Note that the minimum Unity version is 2023.2. It should work on 2023.1 but haven't tested it. Modifying to support earlier versions should be relatively easy.  
 
 Open the tool from the tools menu: Tools -> zwks Procedural generator. The tool will ask you to create a settings asset in your project. Just supply a path and file name.  
 
