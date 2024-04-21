@@ -187,8 +187,15 @@ public class ScenePreviewPropertyDrawer : PropertyDrawer {
         previewMF.sharedMesh = mesh;
         
         if(texture != null && previewMR != null) {
+            var shader = Shader.Find("Universal Render Pipeline/Lit");
+            if(shader == null)
+                shader = Shader.Find("Lit");
+            if(shader == null)
+                shader = Shader.Find("Standard");
+
             if(mat == null)
-                mat = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+                mat = new Material(shader);
+            
             mat.mainTexture = texture;
             previewMR.sharedMaterial = mat;
         }
