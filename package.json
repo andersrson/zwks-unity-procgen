@@ -8,6 +8,11 @@
     "documentationUrl": "https://github.com/andersrson/zwks-unity-procgen",
     "changelogUrl": "https://github.com/andersrson/zwks-unity-procgen",
     "license": "MIT",
+    "dependencies": {
+      "com.unity.mathematics": "1.2.6",
+      "com.unity.burst": "1.8.0",
+      "com.unity.visualscripting": "1.9.0"
+    },
    "keywords": [
       "procedural",
       "noise",
