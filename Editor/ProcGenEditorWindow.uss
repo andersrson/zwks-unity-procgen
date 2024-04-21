@@ -1,0 +1,134 @@
+#zw-procgen-object-field {
+    max-width: 360px;
+}
+
+.zw-top-root-container {
+    width: 1120px;
+    height: 700px;
+}
+.zw-border-container {
+    border-left-color: rgb(96, 96, 96);
+    border-right-color: rgb(96, 96, 96);
+    border-top-color: rgb(96, 96, 96);
+    border-bottom-color: rgb(96, 96, 96);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    border-bottom-right-radius: 11px;
+    border-bottom-left-radius: 11px;
+    -unity-font-style: normal;
+    
+    margin-bottom: 2px;
+    margin-left: 5px;
+    margin-right: 10px;
+    margin-top: 3px;
+    
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    
+}
+
+.zw-pged-root-container {
+    padding-left: 17px;
+    padding-right: 7px;
+    max-width: 350px;
+    min-width: 350px;
+}
+
+#zw-pged-ng-root-container {
+    
+}
+
+#zw-pged-tg-root-container {
+
+}
+
+#zw-pged-mg-root-container {
+
+}
+
+#zw-pged-sp-root-container {
+
+}
+
+.zw-node-preview-image {
+    height: 300px;
+    width: 300px;
+}
+
+.zw-horiz-container {
+    flex-direction: row;
+}
+
+.zw-vertic-container {
+    flex-direction: column;
+    min-width: 365px;
+}
+
+#zw-tgpd-trntype-list {
+    margin-top: 5px;
+}
+#zw-tgpd-trntype-list > ScrollView {
+    margin-top: 5px;
+}
+
+.zw-tgpd-trntype-list-item {
+    padding-left: 16px;
+}
+.zw-tgpd-trntype-list-item > VisualElement {
+    flex-direction: row;
+    max-width: 100%;    
+}
+
+.zw-tgpd-trntype-list-item FloatField {
+    margin-left: 0px;
+    max-width: 48%;
+    min-width: 48%;
+}
+
+.zw-tgpd-trntype-list-item ColorField {
+    margin-left: 15px;
+    max-width: 53%;
+    min-width: 53%;
+}
+.zw-tgpd-trntype-list-item Label {
+    max-width: 40%;
+    min-width: 30%;
+    margin-left: 0px;
+    margin-right: 4px;
+}
+
+.zw-tgpd-trntype-list-item .unity-color-field__input {
+    max-width: 60%;
+    min-width: 60%;
+}
+
+#zw-tgpd-savetex-container {
+    margin-top: 10px;
+}
+
+.zw-tgpd-save-container ObjectField > Label {
+    min-width: 60px;
+}
+.zw-tgpd-save-container Button {
+    min-width: 140px;
+}
+
+.zw-button-noise-save {
+    width: 25%;
+}
+
+.zw-node-propdrawer {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
