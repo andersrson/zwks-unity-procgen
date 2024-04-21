@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Packages/xyz.zwks.procgen/Editor/ProcGenEditorWindow.uss?fileID=7433441132597879392&amp;guid=3fece0361260241a1b7408b5309b60bc&amp;type=3#ProcGenEditorWindow" />
+    <ui:VisualElement name="zw-procgen-object-field" style="flex-grow: 0; flex-direction: column;">
+        <uie:ObjectField label="Generator" type="xyz.zwks.procgen.ProceduralGenerator, xyz.zwks.procgen" binding-path="generator" />
+    </ui:VisualElement>
+</ui:UXML>

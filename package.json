@@ -1,0 +1,22 @@
+{
+    "name": "xyz.zwks.procgen",
+    "version": "1.0.0",
+    "displayName": "zwks Procedural Generator",
+    "description": "Generate objects procedurally",
+    "unity": "2023.2",
+    "unityRelease": "1f1",
+    "documentationUrl": "https://github.com/andersrson/zwks-unity-procgen",
+    "changelogUrl": "https://github.com/andersrson/zwks-unity-procgen",
+    "license": "MIT",
+   "keywords": [
+      "procedural",
+      "noise",
+      "generator",
+      "generation"
+    ],
+    "author": {
+      "name": "Anders Runesson",
+      "email": "anders@runesson.info",
+      "url": "https://github.com/andersrson"
+    }
+  }
