@@ -45,6 +45,7 @@ public class ProcGenEditorWindow : EditorWindow {
             rt.AddNode(new TerrainMapGenerator());
             rt.AddNode(new MeshGenerator());
             rt.AddNode(new ScenePreview());
+            rt.AddNode(new MaterialGenerator());
             needsSave = true;
         } else {
             rt = AssetDatabase.LoadAssetAtPath<ProceduralGenerator>(latest);
@@ -62,6 +63,11 @@ public class ProcGenEditorWindow : EditorWindow {
 
         if(rt.GetNode<MeshGenerator>() == null) {    
             rt.AddNode(new MeshGenerator());
+            needsSave = true;
+        }
+
+        if(rt.GetNode<MaterialGenerator>() == null) {    
+            rt.AddNode(new MaterialGenerator());
             needsSave = true;
         }
 

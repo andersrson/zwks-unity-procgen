@@ -15,6 +15,8 @@ public class ProceduralGenerator : ScriptableObject, IProceduralPipeline, ISeria
 
     public MeshGenerator MeshGen;
 
+    public MaterialGenerator MatGen;
+
     public ScenePreview ScenePreview;
 
     List<IPipelineNode> _nodes;
@@ -31,6 +33,9 @@ public class ProceduralGenerator : ScriptableObject, IProceduralPipeline, ISeria
         } 
         if(node is MeshGenerator) {
             MeshGen = node as MeshGenerator;
+        } 
+        if(node is MaterialGenerator) {
+            MatGen = node as MaterialGenerator;
         } 
         if(node is ScenePreview) {
             ScenePreview = node as ScenePreview;

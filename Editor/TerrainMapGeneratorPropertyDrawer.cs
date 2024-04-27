@@ -25,10 +25,8 @@ public class TerrainMapGeneratorPropertyDrawer : PropertyDrawer {
     [SerializeField]
     Texture2D tex;
     [SerializeField]
-    Material mat;
-
+    
     Label texFileName;
-    Label matFileName;
         
     bool uiInitialized = false;
 
@@ -105,22 +103,11 @@ public class TerrainMapGeneratorPropertyDrawer : PropertyDrawer {
         saveTexContainer.AddToClassList("zw-horiz-container");
         saveTexContainer.AddToClassList("zw-tgpd-save-container");
         
-        saveMatContainer.name = "zw-tgpd-savemat-container";
-        saveMatContainer.AddToClassList("zw-horiz-container");
-        saveMatContainer.AddToClassList("zw-tgpd-save-container");
-
         UnityEngine.UIElements.Button save = new UnityEngine.UIElements.Button(saveTexButtonClicked);
         save.text = "Save as new texture..";
         saveTexContainer.Add(save);
 
         texFileName = new Label();
-        saveTexContainer.Add(texFileName);
-
-        UnityEngine.UIElements.Button saveMat = new UnityEngine.UIElements.Button(saveMatButtonClicked);
-        saveMat.text = "Save as new material..";
-        saveMatContainer.Add(saveMat);
-
-        matFileName = new Label();
         saveTexContainer.Add(texFileName);
         
         tgt.Pipeline.PipelineDataPublish -= PipelineHasNewData;
@@ -169,22 +156,6 @@ public class TerrainMapGeneratorPropertyDrawer : PropertyDrawer {
         tgt.Generate();
     }
 
-    void saveMatButtonClicked() {
-        if(mat == null)
-            return;
-
-        if(AssetDatabase.Contains(tex)) {
-            EditorUtility.SetDirty(tex);
-            return;
-        }
-        
-        if(!AssetDatabase.IsValidFolder("Assets/data"))
-            AssetDatabase.CreateFolder("Assets", "data");
-
-        var path = AssetDatabase.GenerateUniqueAssetPath("Assets/data/terrainmat.asset");
-        AssetDatabase.CreateAsset(mat, path);
-    }
-
     void saveTexButtonClicked() {
         if(tex == null)
             return;
@@ -219,16 +190,6 @@ public class TerrainMapGeneratorPropertyDrawer : PropertyDrawer {
 
         tex = tgt.GetTextureOutput();
         if(tex != null) {
-            if(mat == null) {
-                var shader = Shader.Find("Universal Render Pipeline/Lit");
-                if(shader == null)
-                    shader = Shader.Find("Lit");
-                if(shader == null)
-                    shader = Shader.Find("Standard");
-                
-                mat = new Material(shader);
-            }
-            mat.mainTexture = tex;
             img.image = tex;
         }
     }
