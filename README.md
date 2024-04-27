@@ -22,12 +22,13 @@ Start by setting noise parameters as desired - here's a great start:
 ![Noise settings](/noise-settings.png)  
 
 ### Terrain map
-You'll note the terrain map does not show anything - first you'll need to create the mapping between noise map values and colors. Simply change the 'Size' number to the number of levels you want and start defining!  
+You'll note the terrain map does not show anything - first you'll need to create the mapping between noise map values and colors. Simply change the 'Size' number to the number of levels you want and start defining!   
 
-**NOTE: Color entries have 0 alpha by default! Change to full alpha or you won't see anything in the preview :)**    
+Note that the height value in the last entry is not used. The colors are the layers, and the height values the thresholds between them. The first color entry starts at height 0, and ends at the first height threshold. The last color will start at the second-to-last height entry, and be applied to everything above.
+
+**NOTE: Color entries have 0 alpha by default! Change the alpha or you won't see anything in the preview :)**    
 
 ![Terrain settings](/terrain-map.png)
-
 
 ### Mesh generation
 The height map will need a multiplier to generate any visible difference in height. Set 'Height influence' to around 20 as a start.
@@ -35,3 +36,7 @@ The height map will need a multiplier to generate any visible difference in heig
 ### In-scene preview
 Enable the checkbox named 'Enable scene preview' and a new object will be created in the open scene. It will have a custom marker MonoBehaviour added for identification, call "ProcGenPreviewObject". This object can be safely deleted whenever you wish - but disable the preview checkbox first, or it will be recreated.  
 ![Scene preview 2](/scene-preview-2.png)
+
+## Changelog 
+ - 2024-04-21: First commit
+ - 2024-04-27: Added material generator and custom terrain shader. Using the terrain map as texture does not work for now.
