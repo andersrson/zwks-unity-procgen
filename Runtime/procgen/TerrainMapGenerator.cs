@@ -43,15 +43,6 @@ public class TerrainMapGenerator : IPipelineNode, IDisposable, ISerializationCal
             InputArray = ng.DataArray;
         }
 
-        // if(!DataArray.IsCreated)
-        //     DataArray = new NativeArray<Color>(ng.Width * ng.Height, Allocator.Persistent);
-        // else {
-        //     if(DataArray.Length != ng.Width * ng.Height) {
-        //         DataArray.Dispose();
-        //         DataArray = new NativeArray<Color>(ng.Width * ng.Height, Allocator.Persistent);
-        //     }
-        // }
-
         outputTexture = TerrainMapJob.TerrainMapToTexture(InputArray, terrainTypes, ng.Width, ng.Height);
         
         invalidated = false;

@@ -22,16 +22,16 @@ public static class TerrainMapJob {
         
         public void Execute(int index) {
             float height = Inputs[index];
-            Color start = TerrainTypes[0].Color;
+            Color finalColor = TerrainTypes[0].Color;
             
-            for(int i = 0; i < TerrainTypes.Length; i++) {
+            for(int i = 0; i < TerrainTypes.Length - 1; i++) {
                 if(height >= TerrainTypes[i].MinHeight)
-                    start = TerrainTypes[i].Color;
+                    finalColor = TerrainTypes[i+1].Color;
                 else 
                     break;
             }
 
-            Colors[index] = start;
+            Colors[index] = finalColor;
         }
     }
 

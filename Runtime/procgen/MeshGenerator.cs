@@ -93,8 +93,7 @@ public class MeshGenerator : IPipelineNode, IDisposable, ISerializationCallbackR
             outputMesh = null;
             invalidated = true;
             Generate();
-        }
-          
+        } 
     }
 
     public void OnAfterDeserialize() {

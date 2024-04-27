@@ -9,6 +9,7 @@ namespace xyz.zwks.procgen.editor {
 [CustomPropertyDrawer(typeof(ScenePreview))]
 public class ScenePreviewPropertyDrawer : PropertyDrawer {
     
+    [SerializeField]
     ScenePreview previewGenerator;
     VisualElement root;
 
@@ -23,8 +24,10 @@ public class ScenePreviewPropertyDrawer : PropertyDrawer {
     [SerializeField]
     MeshRenderer previewMR;
 
+    [SerializeField]
     Mesh mesh;
-    Texture2D texture;
+
+    [SerializeField]
     Material mat;
 
     bool uiInitialized = false;
@@ -154,9 +157,17 @@ public class ScenePreviewPropertyDrawer : PropertyDrawer {
             var mg = (MeshGenerator)node;
             mesh = mg.GetMeshOutput();
         }
-        if(node is TerrainMapGenerator) {
-            var tg = (TerrainMapGenerator)node;
-            texture = tg.GetTextureOutput();
+        if(node is MaterialGenerator) {
+            var mtr = (MaterialGenerator)node;
+            var newMat = mtr.GetMaterialOutput();
+
+            if(previewMR != null) {
+                if(newMat != previewMR.sharedMaterial) {
+                    previewMR.sharedMaterial = null;
+                } else {
+                }
+            }
+            mat = newMat;
         }
         
         if(node != previewGenerator)
@@ -184,21 +195,11 @@ public class ScenePreviewPropertyDrawer : PropertyDrawer {
         if(mesh == null)
             return;
 
-        previewMF.sharedMesh = mesh;
+        if(previewMF.sharedMesh != mesh) 
+            previewMF.sharedMesh = mesh;
         
-        if(texture != null && previewMR != null) {
-            var shader = Shader.Find("Universal Render Pipeline/Lit");
-            if(shader == null)
-                shader = Shader.Find("Lit");
-            if(shader == null)
-                shader = Shader.Find("Standard");
-
-            if(mat == null)
-                mat = new Material(shader);
-            
-            mat.mainTexture = texture;
+        if(mat != null && previewMR.sharedMaterial != mat)
             previewMR.sharedMaterial = mat;
-        }
     }
 }
 }

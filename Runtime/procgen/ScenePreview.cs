@@ -39,7 +39,7 @@ public class ScenePreview : IPipelineNode, IDisposable {
                 tmpGo.transform.position = spawnAt;
                 tmpGo.transform.rotation = Quaternion.identity;
                 tmpGo.name = "Procedural preview";
-                //tmpGo = GameObject.Instantiate(prefab, spawnAt, Quaternion.identity);
+                
                 if(tmpGo.GetComponentInChildren<ProcGenPreview>() == null)
                     tmpGo.AddComponent<ProcGenPreview>();
                 if(tmpGo.GetComponentInChildren<MeshFilter>() == null)
@@ -77,6 +77,8 @@ public class ScenePreview : IPipelineNode, IDisposable {
         
         if(!EnableInScenePreview)
             return;
+
+            
     }
 
 #region dispose

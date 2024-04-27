@@ -24,6 +24,9 @@ public class ProcGenRootEditor : Editor {
     VisualElement meshGenRoot;
     VisualElement meshGenPropertyFieldRoot;
 
+    VisualElement materialRoot;
+    VisualElement materialPropertyFieldRoot;
+    
     VisualElement previewRoot;
     VisualElement previewPropertyFieldRoot;
 
@@ -48,6 +51,11 @@ public class ProcGenRootEditor : Editor {
             EditorUtility.SetDirty(tgt);
         }
 
+        if(tgt.GetNode<MaterialGenerator>() == null) {
+            tgt.AddNode(new MaterialGenerator());
+            EditorUtility.SetDirty(tgt);
+        }
+
         if(tgt.GetNode<ScenePreview>() == null) {
             tgt.AddNode(new ScenePreview());
             EditorUtility.SetDirty(tgt);
@@ -57,6 +65,7 @@ public class ProcGenRootEditor : Editor {
         noiseGenRoot = new VisualElement();
         terrainMapRoot = new VisualElement();
         meshGenRoot = new VisualElement();
+        materialRoot = new VisualElement();
         previewRoot = new VisualElement();
 
         var horizCont = new VisualElement();
@@ -78,6 +87,7 @@ public class ProcGenRootEditor : Editor {
         leftVert.Add(noiseGenRoot);
         midVert.Add(terrainMapRoot);
         rightVert.Add(meshGenRoot);
+        rightVert.Add(materialRoot);
         rightVert.Add(previewRoot);
 
         noiseGenRoot.name = "zw-pged-ng-root-container";
@@ -112,6 +122,17 @@ public class ProcGenRootEditor : Editor {
         PropertyField meshf = new PropertyField();
         meshf.bindingPath = "MeshGen";
         meshGenPropertyFieldRoot.Add(meshf);
+
+        materialRoot.name = "zw-pged-matg-root-container";
+        materialRoot.AddToClassList("zw-border-container");
+        materialRoot.AddToClassList("zw-pged-root-container");
+
+        materialPropertyFieldRoot = new VisualElement();
+        materialRoot.Add(materialPropertyFieldRoot);
+
+        PropertyField matf = new PropertyField();
+        matf.bindingPath = "MatGen";
+        materialPropertyFieldRoot.Add(matf);
 
         previewRoot.name = "zw-pged-sp-root-container";
         previewRoot.AddToClassList("zw-border-container");

@@ -67,7 +67,7 @@
 
 .zw-vertic-container {
     flex-direction: column;
-    min-width: 365px;
+    
 }
 
 #zw-tgpd-trntype-list {
