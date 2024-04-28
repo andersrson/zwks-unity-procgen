@@ -8,8 +8,8 @@ namespace xyz.zwks.procgen {
 
 [Serializable]
 public struct TerrainType {
-    public float MinHeight;
     public Color Color;
+    public float MinHeight;
 }
 
 [Serializable]
@@ -21,8 +21,7 @@ public class TerrainMapGenerator : IPipelineNode, IDisposable, ISerializationCal
     Texture2D outputTexture;
 
     [SerializeField]
-    Color[] colors;
-
+    
     NativeArray<Color> DataArray;
     NativeArray<float> InputArray;
     NoiseGenerator ng;

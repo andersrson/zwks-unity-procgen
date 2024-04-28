@@ -82,7 +82,6 @@ public class MaterialGeneratorPropertyDrawer : PropertyDrawer {
         var textureContainer = new VisualElement();
         textureContainer.name = "zw-mtpd-texture-container";
 
-
         VisualElement saveControlsContainer = new VisualElement();
         root.Add(saveControlsContainer);
 
@@ -94,7 +93,7 @@ public class MaterialGeneratorPropertyDrawer : PropertyDrawer {
         saveMatContainer.AddToClassList("zw-vertic-container");
         saveMatContainer.AddToClassList("zw-mtpd-save-container");
 
-        UnityEngine.UIElements.Button saveMat = new UnityEngine.UIElements.Button(saveMatButtonClicked);
+        saveMat = new UnityEngine.UIElements.Button(saveMatButtonClicked);
         saveMat.text = "Save as new material..";
         saveMatContainer.Add(saveMat);
         
@@ -175,6 +174,9 @@ public class MaterialGeneratorPropertyDrawer : PropertyDrawer {
 
     void PipelineHasNewData(object sender, IPipelineNode node) {
         
+        if(tgt == null)
+            return;
+
         if(node is TerrainMapGenerator) {
             var tg = (TerrainMapGenerator)node;
             var tx = tg.GetTextureOutput();
@@ -182,7 +184,7 @@ public class MaterialGeneratorPropertyDrawer : PropertyDrawer {
                 texture = tx;
         }
 
-        if(AssetDatabase.Contains(tgt.outputMaterial)) {
+        if(tgt.outputMaterial != null && AssetDatabase.Contains(tgt.outputMaterial)) {
             EditorUtility.SetDirty(tgt.outputMaterial);
             matFileNameLabel.text = AssetDatabase.GetAssetPath(tgt.outputMaterial);
         }

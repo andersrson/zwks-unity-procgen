@@ -8,9 +8,11 @@ A custom EditorWindow using UI Toolkit lets you configure the generator in the e
 
 The generated textures, materials, and meshes can be saved to your project as assets.
 
-![Editor Window](/editor-window.png)
+![I can do this all day](/Docs/images/ProcGen-Preview-trim1.gif)
 
-![Scene preview](/scene-preview.png)
+![Editor Window](/Docs/images/editor-window.png)
+
+![Scene preview](/Docs/images/scene-preview.png)
 
 ## Usage
 Install the package from Package Manager using the Git URL (https://github.com/andersrson/zwks-unity-procgen.git) and wait for compilation. Note that the minimum Unity version is 2023.2. It should work on 2023.1 but haven't tested it. Modifying to support earlier versions should be relatively easy.  
@@ -19,24 +21,29 @@ Open the tool from the tools menu: Tools -> zwks Procedural generator. The tool 
 
 ### Noise
 Start by setting noise parameters as desired - here's a great start:  
-![Noise settings](/noise-settings.png)  
+![Noise settings](/Docs/images/noise-settings.png)  
 
 ### Terrain map
 You'll note the terrain map does not show anything - first you'll need to create the mapping between noise map values and colors. Simply change the 'Size' number to the number of levels you want and start defining!   
 
-Note that the height value in the last entry is not used. The colors are the layers, and the height values the thresholds between them. The first color entry starts at height 0, and ends at the first height threshold. The last color will start at the second-to-last height entry, and be applied to everything above.
+The first color entry starts at height 0, and ends at the first height threshold. The last color will start at the last threshold entry, and be applied to everything above.
+
+The terrain shader currently supports 8 color layers. If you add more than 8 color layers in the terrain map they will simply be quietly ignored.
 
 **NOTE: Color entries have 0 alpha by default! Change the alpha or you won't see anything in the preview :)**    
 
-![Terrain settings](/terrain-map.png)
+![Terrain settings](/Docs/images/terrain-map.png)
 
 ### Mesh generation
 The height map will need a multiplier to generate any visible difference in height. Set 'Height influence' to around 20 as a start.
 
 ### In-scene preview
-Enable the checkbox named 'Enable scene preview' and a new object will be created in the open scene. It will have a custom marker MonoBehaviour added for identification, call "ProcGenPreviewObject". This object can be safely deleted whenever you wish - but disable the preview checkbox first, or it will be recreated.  
-![Scene preview 2](/scene-preview-2.png)
+Enable the checkbox named 'Enable scene preview' and a new object will be created in the open scene. It will have a custom marker MonoBehaviour added for identification, called "ProcGenPreviewObject". This object can be safely deleted whenever you wish - but disable the preview checkbox first, or it will be recreated.  
+![Scene preview 2](/Docs/images/scene-preview-2.png)
 
 ## Changelog 
  - 2024-04-21: First commit
  - 2024-04-27: Added material generator and custom terrain shader. Using the terrain map as texture does not work for now.
+ - 2024-04-28: 
+    - Changed terrain map editor layout to reflect Color-Threshold-Color structure. 
+    - Minor cleanups.
