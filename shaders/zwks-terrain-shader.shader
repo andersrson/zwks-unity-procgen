@@ -91,6 +91,7 @@ Shader "Custom/zwks-terrain-shader" {
                 add pAT + useLevel -> range(0, 2). divide by 2 -> 0, 0.5, or 1. Subtract 0.5 -> -0.5, 0, or 0.5. 
                 multiply by 2 -> -1, 0, 1 -> saturate -> 0 or 1  
             */
+            
             float useLevel = saturate(sign(_LevelsUsed - 1));
             float pointAboveThreshold = saturate(sign(pointHeight - _Height1));
             float changeColor = saturate((((pointAboveThreshold + useLevel) / 2) - 0.5) * 2);

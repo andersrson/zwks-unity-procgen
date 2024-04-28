@@ -72,40 +72,48 @@
 
 #zw-tgpd-trntype-list {
     margin-top: 5px;
+    flex-grow: 1;
 }
 #zw-tgpd-trntype-list > ScrollView {
     margin-top: 5px;
 }
 
 .zw-tgpd-trntype-list-item {
-    padding-left: 16px;
+    max-height: 40px;
+    min-height: 40px;
 }
+
+.zw-tgpd-trntype-list-item-last FloatField {
+    display: none;
+}
+
 .zw-tgpd-trntype-list-item > VisualElement {
     flex-direction: row;
     max-width: 100%;    
 }
 
 .zw-tgpd-trntype-list-item FloatField {
-    margin-left: 0px;
-    max-width: 48%;
-    min-width: 48%;
+    max-height: 20px;
+    min-height: 20px;
+    margin-top: 20px;
+    max-width: 145px;
+    min-width: 145px;
 }
 
 .zw-tgpd-trntype-list-item ColorField {
-    margin-left: 15px;
-    max-width: 53%;
-    min-width: 53%;
+    max-height: 20px;
+    min-height: 20px;
+    max-width: 145px;
+    min-width: 145px;
 }
 .zw-tgpd-trntype-list-item Label {
-    max-width: 40%;
-    min-width: 30%;
-    margin-left: 0px;
-    margin-right: 4px;
+    flex-shrink: 1;
+    flex-grow: 0;
+    min-width: 40px;
 }
 
 .zw-tgpd-trntype-list-item .unity-color-field__input {
-    max-width: 60%;
-    min-width: 60%;
+    
 }
 
 #zw-tgpd-savetex-container {

@@ -7,12 +7,12 @@ using UnityEngine;
 namespace xyz.zwks.procgen {
 
 [Serializable]
-public class NoiseGenerator : IPipelineNode, IDisposable, ISerializationCallbackReceiver {
+public class NoiseGenerator : IPipelineNode, IDisposable {
 
 #region noise props
-    [Range(1, 255)]
+    
     public int Width = 128;
-    [Range(1, 255)]
+    
     public int Height = 128;
 
     public float Scale = 1.5f;
@@ -30,7 +30,6 @@ public class NoiseGenerator : IPipelineNode, IDisposable, ISerializationCallback
     public float Persistence = 0.5f;
 #endregion
 
-    float[] noiseDataOutput;
     Texture2D texture2DOutput;
 
     bool invalidated = true;
@@ -79,35 +78,6 @@ public class NoiseGenerator : IPipelineNode, IDisposable, ISerializationCallback
         hasGenerated = false;
     }
 
-    public bool HasOutput() {
-        if(!hasGenerated)
-            return false;
-        if(invalidated || invalidatedDimensions)
-            return false;
-        if(!DataArray.IsCreated)
-            return false;
-
-        return true;
-    }
-
-    public float[] GetNoiseDataOutput() { 
-
-        if(noiseDataOutput != null)
-            return noiseDataOutput;
-
-        if(DataArray.Length == 0 || !DataArray.IsCreated)
-            return null;
-
-        if(noiseDataOutput == null)
-            noiseDataOutput = new float[Width * Height];
-        else if(noiseDataOutput.Length != Width * Height)
-            noiseDataOutput = new float[Width * Height];
-
-        DataArray.CopyTo(noiseDataOutput);
-
-        return noiseDataOutput;     
-    }
-
     public Texture2D GetTextureOutput() {
 
         if(texture2DOutput  != null)
@@ -115,7 +85,6 @@ public class NoiseGenerator : IPipelineNode, IDisposable, ISerializationCallback
         
         if(DataArray.Length == 0 || !DataArray.IsCreated)
             return null;
-        
         
         texture2DOutput = MapToTextureJob.MapToTexture2D(DataArray, Width, Height);
 
@@ -144,8 +113,7 @@ public class NoiseGenerator : IPipelineNode, IDisposable, ISerializationCallback
         invalidatedDimensions = false;
         hasGenerated = true;
         texture2DOutput = null;
-        noiseDataOutput = null;
-
+        
         _pipeline.NodeHasOutput(this);
     }
 
@@ -155,10 +123,6 @@ public class NoiseGenerator : IPipelineNode, IDisposable, ISerializationCallback
     public void SetPipeline(IProceduralPipeline pipeline) {
         _pipeline = pipeline;
     }
-
-    public void OnAfterDeserialize() { }
-    
-    public void OnBeforeSerialize() { }
 
     private bool disposedValue;
 

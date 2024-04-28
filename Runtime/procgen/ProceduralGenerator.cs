@@ -72,12 +72,15 @@ public class ProceduralGenerator : ScriptableObject, IProceduralPipeline, ISeria
                 _nodes.Add(MeshGen);
             if(ScenePreview != null)
                 _nodes.Add(ScenePreview);
+            if(MatGen != null)
+                _nodes.Add(MatGen);
         }
         
         NoiseGen.SetPipeline(this);
         TerrainMapGen.SetPipeline(this);
         MeshGen.SetPipeline(this);
         ScenePreview.SetPipeline(this);
+        MatGen.SetPipeline(this);
     }
 
     public void OnBeforeSerialize() {

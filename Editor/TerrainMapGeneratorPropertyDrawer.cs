@@ -54,22 +54,50 @@ public class TerrainMapGeneratorPropertyDrawer : PropertyDrawer {
         list.name = "zw-tgpd-trntype-list";
         list.bindingPath = "terrainTypes";
         list.dataSource = tgt.terrainTypes;
-        list.reorderable = false;
-        list.fixedItemHeight = 30f;
+        list.reorderable = true;
+        list.fixedItemHeight = 40;
+        
         list.makeItem = () => {
                 
-                PropertyField fl = new PropertyField();
-                fl.AddToClassList("zw-tgpd-trntype-list-item");
-                fl.RegisterValueChangeCallback(terrainValueChanged);
-                fl.RegisterCallback<ChangeEvent<Single>>(terrainTypesChanged);
-                fl.RegisterCallback<ChangeEvent<Color>>(terrainTypesChanged);
+                VisualElement itm = new VisualElement();
+                itm.AddToClassList("zw-tgpd-trntype-list-item");
+                itm.AddToClassList("zw-horiz-container");
+
+                ColorField cl = new ColorField("Color");
+                cl.AddToClassList("zw-tgpd-trntype-list-item-color");
+                cl.AddToClassList("zw-tgpd-trntype-list-item");
+                cl.RegisterCallback<ChangeEvent<Color>>(terrainTypeColorChanged);
+                itm.Add(cl);
+
+                FloatField ht = new FloatField("threshold");
+                ht.AddToClassList("zw-tgpd-trntype-list-item-height");
+                ht.AddToClassList("zw-tgpd-trntype-list-item");
+                ht.RegisterCallback<ChangeEvent<Single>>(terrainTypeThresholdChanged);
+                itm.Add(ht);
                 
-                return fl;
+                //fl.AddToClassList("zw-tgpd-trntype-list-item");
+                //fl.RegisterValueChangeCallback(terrainValueChanged);
+                
+                return itm;
             };
 
         list.bindItem = (element, index) => {
-            var pf = element as PropertyField;
-            pf.BindProperty(terrainTypes.GetArrayElementAtIndex(index));
+            var pf = element as VisualElement;
+            var cf = pf.Q<ColorField>(className: "zw-tgpd-trntype-list-item-color");
+            var ht = pf.Q<FloatField>(className: "zw-tgpd-trntype-list-item-height");
+
+            var terrainItem = terrainTypes.GetArrayElementAtIndex(index);
+
+            cf.BindProperty(terrainItem.FindPropertyRelative("Color"));
+            ht.BindProperty(terrainItem.FindPropertyRelative("MinHeight"));
+
+            if(index == tgt.terrainTypes.Count - 1) {
+                var oldLast = list.Q(className: "zw-tgpd-trntype-list-item-last");
+                if(oldLast != null) {
+                    oldLast.RemoveFromClassList("zw-tgpd-trntype-list-item-last");
+                }
+                pf.AddToClassList("zw-tgpd-trntype-list-item-last");
+            }
         };
 
         list.itemsAdded += terrainTypesCountChanged;
@@ -122,11 +150,10 @@ public class TerrainMapGeneratorPropertyDrawer : PropertyDrawer {
         if(list == null || list.Count() < 1) 
             return;
 
-        tgt.Invalidate();
-        tgt.Generate();
+        GenerateTerrain();
     }
     
-    void terrainTypesChanged(ChangeEvent<Single> evt) {
+    void terrainTypeThresholdChanged(ChangeEvent<Single> evt) {
         if(evt.newValue == evt.previousValue)
             return;
         
@@ -135,11 +162,17 @@ public class TerrainMapGeneratorPropertyDrawer : PropertyDrawer {
             return;
 
         if(evt.newValue < 0f || evt.newValue > 1.0f) {
-            PropertyField pf = (PropertyField)evt.currentTarget;
-            var ff = pf.Q<UnityEngine.UIElements.FloatField>();
+            var ff = (FloatField)evt.currentTarget;
             ff.value = math.clamp(evt.newValue, 0f, 1f);
         }
 
+        tgt.Invalidate();
+        tgt.Generate();
+    }
+    
+    void terrainTypeColorChanged(ChangeEvent<Color> evt) {
+        if(evt.newValue == evt.previousValue)
+            return;
         tgt.Invalidate();
         tgt.Generate();
     }
@@ -149,11 +182,11 @@ public class TerrainMapGeneratorPropertyDrawer : PropertyDrawer {
         tgt.Generate();
     }
 
-    void terrainTypesChanged(ChangeEvent<Color> evt) {
-        if(evt.newValue == evt.previousValue)
-            return;
-        tgt.Invalidate();
-        tgt.Generate();
+    void GenerateTerrain() {
+        root.schedule.Execute(() => {
+            tgt.Invalidate();
+            tgt.Generate();
+        });
     }
 
     void saveTexButtonClicked() {

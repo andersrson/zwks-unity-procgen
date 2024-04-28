@@ -10,7 +10,7 @@ using UnityEngine.TerrainUtils;
 namespace xyz.zwks.procgen {
 
 [Serializable]
-public class MaterialGenerator : IPipelineNode, IDisposable, ISerializationCallbackReceiver {
+public class MaterialGenerator : IPipelineNode, IDisposable {
     
     public Material outputMaterial;
     public string SelectedShader;
@@ -199,6 +199,9 @@ public class MaterialGenerator : IPipelineNode, IDisposable, ISerializationCallb
         } else 
             return;
 
+        if(tmGen == null || tmGen.terrainTypes == null || tmGen.terrainTypes.Count == 0)
+            return;
+
         UpdateMaterial();
     }
 
@@ -255,17 +258,13 @@ public class MaterialGenerator : IPipelineNode, IDisposable, ISerializationCallb
             outputMaterial.SetFloat(minHeightID, 0f);
             outputMaterial.SetInt(levelCountID, tmGen.terrainTypes.Count);
 
-            for (int i = 0; i < tmGen.terrainTypes.Count; i++)
+            for (int i = 0; i < tmGen.terrainTypes.Count && i < colIDs.Length; i++)
                 outputMaterial.SetColor(colIDs[i], tmGen.terrainTypes[i].Color);
 
-            for(int i = 0; i < tmGen.terrainTypes.Count; i++)
+            for(int i = 0; i < tmGen.terrainTypes.Count && i < heightIDs.Length; i++)
                 outputMaterial.SetFloat(heightIDs[i], tmGen.terrainTypes[i].MinHeight);            
         }
     }
-
-    public void OnAfterDeserialize() { }
-
-    public void OnBeforeSerialize() { }
 
 #region dispose
     private bool disposedValue;
